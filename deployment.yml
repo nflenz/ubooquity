@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubooquity
+spec:
+  replicas: 1
+  template:
+    metadata:
+    spec:
+      volumes:
+      - name: books
+        hostPath:
+          path: /disk/ubooquity
+          type: Directory
+      - name: config
+        hostPath:
+          path: /disk/ubooquity/config
+          type: Directory
+      containers:
+      - name: ubooquity
+        image: lscr.io/linuxserver/ubooquity
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: books
+          mountPath: /books
+        - name: config
+          mountPath: /config

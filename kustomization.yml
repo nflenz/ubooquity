@@ -1,0 +1,10 @@
+namespace: ubooquity
+
+resources:
+  - namespace.yml
+  - deployment.yml
+  - service.yml
+  - ingress.yml
+
+commonLabels:
+  app: ubooquity
