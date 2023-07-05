@@ -4,6 +4,7 @@ resources:
   - namespace.yml
   - deployment.yml
   - service.yml
+  - certificate.yml
   - ingress.yml
 
 commonLabels:

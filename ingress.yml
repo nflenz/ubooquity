@@ -1,31 +1,16 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
-  name: ubooquity
+  name: books
 spec:
-  rules:
-  - host: books.nickiness.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: ubooquity
-            port:
-              number: 2202
-      - path: /admin
-        pathType: Prefix
-        backend:
-          service:
-            name: ubooquity
-            port:
-              number: 2203
-      - path: /ubooquity/admin
-        pathType: Prefix
-        backend:
-          service:
-            name: ubooquity
-            port:
-              number: 2203
+  entryPoints:
+    - websecure
+  routes:
+  - match: Path(`/`)
+    kind: Rule
+    services:
+    - name: books
+      port: 8080
+  tls:
+    secretName: books.nickiness.com
